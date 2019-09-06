@@ -13,14 +13,14 @@ class TimeLib:
         return end_time.strftime('%Y-%m-%d %X')
 
 
-    # 时间格式 2012-12-12 00:00:00
+    # 时间格式 2012-12-12 00:00:00 or 2012-12-12 
     def get_random_time(start_time: str, end_time: str):
         random_time = random.randint(time.mktime(time.strptime(start_time, "%Y-%m-%d %H:%M:%S")),
                                      time.mktime(time.strptime(end_time, "%Y-%m-%d %H:%M:%S")))
         return time.strftime("%Y-%m-%d %X", time.localtime(random_time))
 
 
-    # 计算两个日期的时间差
+    # 计算两个日期的时间差 2012-12-12 00:00:00 or 2012-12-12
     def get_D_values(start_time, end_time):
         y1, m1, d1 = time.strptime(start_time.split(' ')[0],"%Y-%m-%d")[0: 3]
         y2, m2, d2 = time.strptime(end_time.split(' ')[0],"%Y-%m-%d")[0: 3]
