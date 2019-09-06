@@ -19,3 +19,10 @@ class TimeLib:
                                      time.mktime(time.strptime(end_time, "%Y-%m-%d %H:%M:%S")))
         return time.strftime("%Y-%m-%d %X", time.localtime(random_time))
 
+
+    # 计算两个日期的时间差
+    def get_D_values(start_time, end_time):
+        y1, m1, d1 = time.strptime(start_time.split(' ')[0],"%Y-%m-%d")[0: 3]
+        y2, m2, d2 = time.strptime(end_time.split(' ')[0],"%Y-%m-%d")[0: 3]
+        return (datetime.datetime(y2, m2, d2) - (datetime.datetime(y1, m1, d1))).days
+
