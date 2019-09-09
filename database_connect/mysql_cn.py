@@ -17,3 +17,9 @@ class MysqlCn:
 
     def close(self):
         self.connection.close()
+
+    def truncate_tables(self, tablename: list):
+        for i in tablename:
+            sql = "truncate %s" % i
+            self.cur.execute(sql)
+        self.connection.commit()
