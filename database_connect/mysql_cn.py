@@ -34,7 +34,7 @@ class MysqlCn:
         self.connection.commit()
 
     def query_data(self, tablename):
-        sql = "select * from rc_user"
+        sql = "select * from table_name "
         self.cur.execute(sql)
         for i in self.cur.fetchall():
             print(i)
