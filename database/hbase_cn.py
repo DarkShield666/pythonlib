@@ -7,9 +7,15 @@
 # 替换python3 Hbase文件/usr/local/lib/python3.6/dist-packages/hbase/Hbase.py和ttypes.py
 # (参考学习) https://blog.csdn.net/luanpeng825485697/article/details/81048468
 
-from thrift.transport import TSocket, TTransport
-from thrift.protocol import TBinaryProtocol
+# from thrift.transport import TSocket, TTransport
+# from thrift.protocol import TBinaryProtocol
+# from hbase import Hbase
+# from hbase.ttypes import *
+
+
+from thrift.transport import TSocket
 from hbase import Hbase
+from hbase.ttypes import *
 
 
 class HbaseCn:
@@ -23,6 +29,9 @@ class HbaseCn:
     def query_data(self, tableName, row, column):
         data = self.Hbase_client.get(tableName, row, column)
         return data[0].value
+
+    def insert_or_update_data(self, tableame, row, column, data):
+        self.Hbase_client.mutateRow(tableame, row, [Mutation(column=column, value=data)])
 
     def hbase_close(self):
         self.transport.close()
