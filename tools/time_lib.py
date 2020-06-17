@@ -13,7 +13,7 @@ class TimeLib:
     def get_days_later_time(start_time: str, day: int):
         start_time = start_time.split(' ')[0]
         y, m, d = time.strptime(start_time, "%Y-%m-%d")[0: 3]
-        end_time = datetime.datetime(y, m, d) + datetime.timedelta(days=day)
+        end_time = datetime.datetime(y, m, d) - datetime.timedelta(days=day)    # 可以加或者减
         return end_time.strftime('%Y-%m-%d %X')
 
     # 时间格式 2012-12-12 00:00:00 or 2012-12-12
@@ -29,4 +29,19 @@ class TimeLib:
         y1, m1, d1 = time.strptime(start_time.split(' ')[0],"%Y-%m-%d")[0: 3]
         y2, m2, d2 = time.strptime(end_time.split(' ')[0],"%Y-%m-%d")[0: 3]
         return (datetime.datetime(y2, m2, d2) - (datetime.datetime(y1, m1, d1))).days
+        # return (datetime.datetime(y2, m2, d2) - (datetime.datetime(y1, m1, d1))).hour
 
+    @staticmethod
+    def get_h_values(start_time, end_time):
+        # print(round((time.mktime(time.strptime(end_time, "%Y-%m-%d %H:%M:%S")) - time.mktime(time.strptime(start_time, "%Y-%m-%d %H:%M:%S"))/3600),4))
+        hour = ((time.mktime(time.strptime(end_time, "%Y-%m-%d %H:%M:%S")) - time.mktime(time.strptime(start_time, "%Y-%m-%d %H:%M:%S")))/3600)
+        print("%.3f" % hour)
+        print(round(hour, 3))
+
+
+if __name__ == '__main__':
+    start = '2020-06-17 12:12:12'
+    end = '2020-06-17 13:42:55'
+    # print(TimeLib.get_days_later_time(a, 5))
+
+    TimeLib.get_h_values(start,end)
