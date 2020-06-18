@@ -23,13 +23,6 @@ class TimeLib:
                                      time.mktime(time.strptime(end_time, "%Y-%m-%d %H:%M:%S")))
         return time.strftime("%Y-%m-%d %X", time.localtime(random_time))
 
-    # 计算两个日期的时间差 2012-12-12 00:00:00 or 2012-12-12
-    @staticmethod
-    def get_d_values(start_time: str, end_time: str):
-        y1, m1, d1 = time.strptime(start_time.split(' ')[0],"%Y-%m-%d")[0: 3]
-        y2, m2, d2 = time.strptime(end_time.split(' ')[0],"%Y-%m-%d")[0: 3]
-        return (datetime.datetime(y2, m2, d2) - (datetime.datetime(y1, m1, d1))).days
-        # return (datetime.datetime(y2, m2, d2) - (datetime.datetime(y1, m1, d1))).hour
 
     @staticmethod
     def get_h_values(start_time, end_time):
@@ -37,6 +30,26 @@ class TimeLib:
         hour = ((time.mktime(time.strptime(end_time, "%Y-%m-%d %H:%M:%S")) - time.mktime(time.strptime(start_time, "%Y-%m-%d %H:%M:%S")))/3600)
         print("%.3f" % hour)
         print(round(hour, 3))
+
+
+
+    # 计算两个日期的时间差 2012-12-12 00:00:00 or 2012-12-12
+    @staticmethod
+    def get_d_values(start_time: str, end_time: str):
+        y1, m1, d1 = time.strptime(start_time.split(' ')[0],"%Y-%m-%d")[0: 3]
+        y2, m2, d2 = time.strptime(end_time.split(' ')[0],"%Y-%m-%d")[0: 3]
+        return (datetime.datetime(y2, m2, d2) - (datetime.datetime(y1, m1, d1))).days
+        # return (datetime.datetime(y2, m2, d2) - (datetime.datetime(y1, m1, d1))).seconds
+
+
+    # 从数据库获取到的时间类型都为datatime类型 获取两个时间之间的时间 秒数
+    @staticmethod
+    def diff_time(start_time, end_time):
+        # 计算Bug 解决时间到 创建时间/指派时间 之间秒数差值
+        if isinstance(start_time, str) or isinstance(end_time, str):
+            return 7200
+        return (datetime.datetime.strptime(end_time.strftime('%Y-%m-%d %H:%M:%S'), "%Y-%m-%d %X") -
+                datetime.datetime.strptime(start_time.strftime('%Y-%m-%d %H:%M:%S'), "%Y-%m-%d %X")).seconds
 
 
 if __name__ == '__main__':
