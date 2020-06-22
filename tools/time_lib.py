@@ -26,21 +26,17 @@ class TimeLib:
 
     @staticmethod
     def get_h_values(start_time, end_time):
-        # print(round((time.mktime(time.strptime(end_time, "%Y-%m-%d %H:%M:%S")) - time.mktime(time.strptime(start_time, "%Y-%m-%d %H:%M:%S"))/3600),4))
         hour = ((time.mktime(time.strptime(end_time, "%Y-%m-%d %H:%M:%S")) - time.mktime(time.strptime(start_time, "%Y-%m-%d %H:%M:%S")))/3600)
         print("%.3f" % hour)
         print(round(hour, 3))
 
-
-
     # 计算两个日期的时间差 2012-12-12 00:00:00 or 2012-12-12
     @staticmethod
     def get_d_values(start_time: str, end_time: str):
-        y1, m1, d1 = time.strptime(start_time.split(' ')[0],"%Y-%m-%d")[0: 3]
-        y2, m2, d2 = time.strptime(end_time.split(' ')[0],"%Y-%m-%d")[0: 3]
+        y1, m1, d1 = time.strptime(start_time.split(' ')[0], "%Y-%m-%d")[0: 3]
+        y2, m2, d2 = time.strptime(end_time.split(' ')[0], "%Y-%m-%d")[0: 3]
         return (datetime.datetime(y2, m2, d2) - (datetime.datetime(y1, m1, d1))).days
         # return (datetime.datetime(y2, m2, d2) - (datetime.datetime(y1, m1, d1))).seconds
-
 
     # 从数据库获取到的时间类型都为datatime类型 获取两个时间之间的时间 秒数
     @staticmethod
@@ -57,4 +53,4 @@ if __name__ == '__main__':
     end = '2020-06-17 13:42:55'
     # print(TimeLib.get_days_later_time(a, 5))
 
-    TimeLib.get_h_values(start,end)
+    TimeLib.get_h_values(start, end)

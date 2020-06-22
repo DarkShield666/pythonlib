@@ -35,7 +35,6 @@
 
 
 import time
-import datetime
 
 # <class 'time.struct_time'>
 # time.struct_time(tm_year=2019, tm_mon=9, tm_mday=6...
@@ -49,10 +48,17 @@ print(time.strftime("%Y-%m-%d %X", time.localtime()))
 print(type(time.strftime("%Y-%m-%d %X", time.localtime())))
 
 
+#  str ---> time
 # 字符串到时间的转换,把字符串"2008-08-08"转换为一个元祖返回
-# time.struct_time(tm_year=2008, tm_mon=8, tm_mday=8...
-print(time.strptime("2008-08-08", "%Y-%m-%d"))
+# <class 'time.struct_time'>
+# time.struct_time(tm_year=2008, tm_mon=8, tm_mday=8, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=4, tm_yday=221, tm_isdst=-1)
+str = "2008-08-08"
+print(type(time.strptime(str,"%Y-%m-%d")), '\n', time.strptime(str,"%Y-%m-%d"))
 
+# *********************************************************************************************
+
+
+import datetime
 
 # 调用datetime()返回时间类型
 # <class 'datetime.datetime'> 2019-09-06 00:00:00
@@ -62,9 +68,39 @@ print(type(datetime.datetime(y, m, d)), datetime.datetime(y, m, d))
 
 
 # ————————————————————————————————————————————————————————————————————
-# <class 'datetime.datetime'> 2019-09-06 15:36:28.960484
 print(type(datetime.datetime.now()), datetime.datetime.now())
+# <class 'datetime.datetime'> 2019-09-06 15:36:28.960484
+
 
 dt = datetime.datetime.now()
-# <class 'str'> 2019-09-06 15:38:18
 print(type(dt.strftime("%Y-%m-%d %X")), dt.strftime("%Y-%m-%d %X"))
+# <class 'str'> 2019-09-06 15:38:18
+
+# *********************************************************************************************
+
+# CookeBook 时间换算 笔记
+
+
+from datetime import timedelta
+a = timedelta(days=2, hours=6)
+b = timedelta(hours=4.5)
+c = a + b
+print(c, c.days, c.seconds, c.seconds/3600, c.total_seconds()/3600)
+# 2 days, 10:30:00 2 37800 10.5 58.5
+
+
+from datetime import datetime
+a = datetime(2019,9,12)         # <class 'datetime.datetime'>    2019-09-12 00:00:00
+print(a + timedelta(days=10))       # 2019-09-22 00:00:00
+
+b = datetime(2019, 12, 31)
+d = b - a
+print(d.days, d.total_seconds()/3600/24)       # 110 110.0
+
+now = datetime.today()          # 2020-06-20 19:23:25.694315
+print( now + timedelta(minutes=10))  # 2020-06-20 19:23:25.694315
+
+
+
+
+
